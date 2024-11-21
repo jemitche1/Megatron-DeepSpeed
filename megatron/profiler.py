@@ -43,6 +43,8 @@ def setup_profiler(args, device):
         activities = [torch.profiler.ProfilerActivity.CPU]
         activities.extend([torch.profiler.ProfilerActivity.HPU] if device.startswith("hpu") else [])
         activities.extend([torch.profiler.ProfilerActivity.CUDA] if device.startswith("cuda") else [])
+        activities.extend([torch.profiler.ProfilerActivity.XPU] if device.startswith("xpu") else [])
+        
         full = args.profile == 'pt-full'
 
         profiler = torch.profiler.profile(
